@@ -1369,3 +1369,10 @@ html { scroll-behavior: smooth; }
   }
 }
 [class$="__colours"] { height: auto; }
+
+/* Bring product copy closer to the chair without resizing the product image. */
+[class$="__card"] { min-height: 361px; }
+[class$="__cardMedia"] { height: 258px; }
+[class$="__cardMedia"] img { object-position: center bottom; }
+@media (max-width: 900px) { [class$="__cardMedia"] { height: 226px; } }
+@media (max-width: 640px) { [class$="__card"] { min-height: 310px; } [class$="__cardMedia"] { height: 195px; } }
