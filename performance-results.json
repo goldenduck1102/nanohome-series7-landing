@@ -1,0 +1,32 @@
+{
+  "viewport": "391x847, DPR 2, cold browser context, entire page scrolled; no lightbox in transfer totals",
+  "results": [
+    {
+      "name": "before",
+      "requests": 48,
+      "imageBytes": 69578440,
+      "totalBytes": 69877177
+    },
+    {
+      "name": "after",
+      "requests": 48,
+      "imageBytes": 13806110,
+      "totalBytes": 14040061
+    }
+  ],
+  "lab": {
+    "conditions": "Single cold local run per version, 391x847 DPR2, 4 Mbps/80 ms latency, CPU 4x; not field data",
+    "results": [
+      {
+        "variant": "before",
+        "lcp": 8736,
+        "cls": 0.0699360198981402
+      },
+      {
+        "variant": "after",
+        "lcp": 1756,
+        "cls": 0.0003522817515599321
+      }
+    ]
+  }
+}

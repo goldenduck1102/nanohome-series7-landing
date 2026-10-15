@@ -22,7 +22,8 @@ refreshSaved();
 const galleryDialog = campaign.querySelector('dialog');
 document.querySelectorAll('[data-testid="lpe-lifestyle-gallery"] button').forEach((button, index) => button.addEventListener('click', () => {
   const image = galleryDialog.querySelector('img');
-  image.src = button.querySelector('img').src;
+  image.src = button.querySelector('img').dataset.fullSrc || button.querySelector('img').src;
+  image.loading = 'eager';
   image.alt = `Series 7 lifestyle ${index + 1}`;
   galleryDialog.setAttribute('aria-label', image.alt);
   galleryDialog.showModal();
@@ -67,3 +68,15 @@ if (header) {
   new ResizeObserver(resizeHeader).observe(header);
   resizeHeader();
 }
+
+// Keep large editorial photos out of the hero's initial network queue.
+const editorialObserver = new IntersectionObserver(entries => {
+  entries.forEach(({ target: image, isIntersecting }) => {
+    if (!isIntersecting) return;
+    image.loading = 'eager';
+    if (image.dataset.deferredSrcset) image.srcset = image.dataset.deferredSrcset;
+    image.src = image.dataset.deferredSrc;
+    editorialObserver.unobserve(image);
+  });
+}, { rootMargin: '0px' });
+document.querySelectorAll('img[data-deferred-src]').forEach(image => editorialObserver.observe(image));
