@@ -119,3 +119,8 @@ export const lpeSeriesSevenColours = [7, 0, 1, 3, 2, 5].map((index, position) =>
   image: `/images/campaigns/lpe-series7/colour-cutouts/${colourCutouts[position]}.webp`,
 }));
 export const lpeSeriesSevenGallery = ["68dc4", "e3d4d", "3a6fd", "7615c", "f404f", "9fd16"].map(file => `/images/campaigns/lpe-series7/${file}.webp`);
+
+// Presentation-only campaign rules. Never used by catalog, checkout or Medusa.
+export const lpeSeriesSevenEndsAt = "2026-10-31T00:00:00+07:00";
+export const isLpeSeriesSevenEnded = (now = new Date()) => now.getTime() >= Date.parse(lpeSeriesSevenEndsAt);
+export const lpeSeriesSevenDisplayPrice = (price: number) => Math.round(price * 65 / 100);

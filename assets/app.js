@@ -52,10 +52,14 @@ document.querySelectorAll('button').forEach(button => {
     dialog.addEventListener('close', () => dialog.remove(), { once: true });dialog.showModal();
   });
 });
-// Campaign ends at midnight Vietnam time after 20 October 2026.
-if (Date.now() >= Date.parse('2026-10-21T00:00:00+07:00')) {
-  campaign.querySelectorAll('[class*="offerGraphic"], [class*="badge"]').forEach(el => el.remove());
+// Campaign ends at midnight Vietnam time after 30 October 2026.
+if (Date.now() >= Date.parse('2026-10-31T00:00:00+07:00')) {
+  campaign.querySelectorAll('[class*="offerGraphic"], [class*="badge"], [class*="saleNote"]').forEach(el => el.remove());
   const offer = campaign.querySelector('[class*="offer"] > p');if (offer) offer.textContent = 'ƯU ĐÃI ĐÃ KẾT THÚC';
+  document.querySelectorAll('[data-testid="campaign-prices"]').forEach(prices => {
+    const original = prices.querySelector('del');
+    if (original) { prices.querySelector('strong').textContent = original.textContent; original.remove(); }
+  });
   document.title = 'Series 7 Colour Ash · nanoHome';
 }
 const header = document.querySelector('header');

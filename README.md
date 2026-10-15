@@ -17,7 +17,7 @@ Mở http://localhost:3107. Có thể dùng `npm start` với Node.js và Python
 - `index.html`: nội dung và cấu trúc trang.
 - `assets/styles.css`: CSS responsive của bản đã duyệt.
 - `assets/standalone.css`: CSS bổ sung cho bản standalone.
-- `assets/app.js`: gallery, menu, danh sách yêu thích lưu trên trình duyệt và ẩn ưu đãi sau 20/10/2026 (giờ Việt Nam).
+- `assets/app.js`: gallery, menu, danh sách yêu thích lưu trên trình duyệt và ẩn ưu đãi sau 30/10/2026 (giờ Việt Nam).
 - `asset-manifest.json`: đối chiếu đường dẫn ảnh/font gốc với file đóng gói.
 - `source/`: các component TSX, CSS Module và dữ liệu gốc để tiếp tục tích hợp trong dự án Next.js. Đây là nguồn tham khảo; bản standalone chạy trực tiếp từ `index.html`.
 
@@ -43,3 +43,10 @@ Theo yêu cầu mới, cho phép nén mất dữ liệu ở mức vừa phải. 
 - `performance-results.json`: điều kiện và kết quả đo tải thực tế. Số đo lab cũ được đánh dấu riêng, không đại diện bản q90.
 - `image-optimization.json`, `scripts/verify-images.py`: báo cáo/kiểm tra pixel của giai đoạn lossless trước đây; không phải cam kết trùng pixel cho bản q90 hiện tại.
 - Các file gốc được giữ lại, chỉ tải khi được tham chiếu; chúng không tăng lượt tải trang hiện tại.
+
+## Giá hiển thị và thời gian
+
+Ưu đãi 17–30/10/2026, kết thúc lúc 00:00 ngày 31/10/2026 (Việt Nam).
+Giá gạch ngang và giá giảm 35% chỉ là trình bày riêng trên landing này.
+Không cập nhật giá gốc, Medusa, giỏ hàng hay quy tắc giảm giá thực tế.
+Sau hạn trên, trang chỉ giữ giá gốc.

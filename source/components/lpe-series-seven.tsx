@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ProductCardWishlistButton } from "@/components/catalog/product-card-wishlist-button";
-import { lpeSeriesSevenColours, lpeSeriesSevenGallery, lpeSeriesSevenProducts } from "@/lib/content/lpe-series-seven";
+import { lpeSeriesSevenColours, lpeSeriesSevenGallery, lpeSeriesSevenProducts, lpeSeriesSevenDisplayPrice } from "@/lib/content/lpe-series-seven";
 import type { Locale } from "@/i18n/routing";
 import { getLpeSeriesSevenCopy } from "./lpe-series-seven-copy";
 import { LpeSeriesSevenGallery } from "./lpe-series-seven-gallery";
@@ -22,6 +22,7 @@ function Arrow() { return <Image unoptimized src={asset("e3c08.svg")} alt="" wid
 
 export function LpeSeriesSeven({ locale, ended }: { locale: Locale; ended: boolean }) {
   const c = getLpeSeriesSevenCopy(locale);
+  const price = (value: number) => new Intl.NumberFormat("vi-VN").format(value) + " ₫";
   return <article className={styles.page} data-testid="lpe-series-seven">
     <section className={styles.hero} aria-labelledby="series-seven-title">
       <Image unoptimized className={styles.backdrop} src={asset("c9b7c.png")} alt="" fill sizes="100vw" priority />
@@ -50,6 +51,7 @@ export function LpeSeriesSeven({ locale, ended }: { locale: Locale; ended: boole
     </div>
     <section className={styles.colours} aria-labelledby="series-seven-colours">
       <div className={styles.colourHeading}><div><p className={styles.eyebrow}>SERIES 7</p><h2 id="series-seven-colours">{c.colours}</h2></div><a className={styles.textLink} href={campaignDestination}>{c.all}<Arrow /></a></div>
+      {!ended && <div className={styles.saleNote}><strong>−35%</strong><span>{c.eligibility}</span><time dateTime="2026-10-30">17–30.10.2026</time></div>}
       <div className={styles.colourRail}>{lpeSeriesSevenColours.map(product => <Link href={campaignDestination} key={product.slug}><div><Image unoptimized src={product.image} alt={product.name} fill sizes="(max-width: 640px) 28vw, 15vw" /></div><span>{product.name.toUpperCase()}</span></Link>)}</div>
     </section>
     <div className={styles.spaces}>
@@ -66,7 +68,7 @@ export function LpeSeriesSeven({ locale, ended }: { locale: Locale; ended: boole
             <ProductCardWishlistButton variant="included" label={`${c.save}: ${product.name}`} testId={`lpe-save-${product.slug}`} item={{ name: product.sourceName, slug: product.slug, primaryImage: product.image, brand: { name: "Fritz Hansen", slug: "fritz-hansen" }, classificationText: "Series 7", priceLabel: product.priceLabel, priceValue: product.priceValue, badgeClassName: null, badgeLabel: null, isCartEligible: false }} />
             <Link href={campaignDestination} aria-label={product.sourceName}><Image unoptimized src={product.image} alt={product.sourceName} fill sizes="(max-width: 640px) 45vw, (max-width: 1000px) 30vw, 235px" /></Link>
           </div>
-          <div className={styles.cardCopy}><p className={styles.cardMaterial}>{product.name.startsWith("Soft Leather") ? "Ash · Soft Leather" : "Colour Ash"}</p><h3><Link href={campaignDestination}>{product.name === "Xám" ? c.grey : product.name}</Link></h3><Link className={styles.textLink} href={campaignDestination}>{c.detail}<Arrow /></Link></div>
+          <div className={styles.cardCopy}><p className={styles.cardMaterial}>{product.name.startsWith("Soft Leather") ? "Ash · Soft Leather" : "Colour Ash"}</p><h3><Link href={campaignDestination}>{product.name === "Xám" ? c.grey : product.name}</Link></h3><div className={styles.prices} data-testid="campaign-prices">{!ended && <del>{price(product.priceValue)}</del>}<strong>{price(ended ? product.priceValue : lpeSeriesSevenDisplayPrice(product.priceValue))}</strong></div></div>
         </div>)}
       </div>
     </section>
