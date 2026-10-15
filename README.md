@@ -31,10 +31,15 @@ Repo chỉ chứa landing page và tài nguyên cần thiết. Không có backen
 
 Link xem: https://goldenduck1102.github.io/nanohome-series7-landing/
 
-## Tối ưu hiệu năng — 15/10/2026
+## Tối ưu hiệu năng — WebP chất lượng 90, 15/10/2026
 
-- Ảnh sản phẩm và ảnh tách nền giữ nguyên độ phân giải, màu sắc và alpha. Chỉ dùng WebP lossless khi nhỏ hơn bản gốc; đã kiểm tra hash của toàn bộ pixel RGBA sau giải mã. Giữ các file gốc để đối chiếu.
-- 7 ảnh editorial/lifestyle có bản 640/1280/1920 px theo `srcset`. Các bản này nén lossless sau khi resize; trình duyệt chọn kích thước theo khung và mật độ điểm ảnh. Khi mở gallery, tải ảnh gốc đầy đủ, không dùng thumbnail.
-- CSS minify; ảnh editorial dưới màn hình chỉ bắt đầu tải khi đi vào vùng nhìn; có fallback khi tắt JavaScript. Ảnh nền hero dùng srcset; ảnh ghế hero giữ nguyên độ phân giải và tải ngay. Dialog không tải ảnh gốc trước khi mở.
-- Kết quả đo và điều kiện đo: `performance-results.json`. Dung lượng ảnh khi cuộn toàn trang ở 391×847, DPR 2: 69.58 MB → 13.81 MB (giảm khoảng 80%). Số liệu không bao gồm mở ảnh lớn.
-- Kiểm tra chất lượng: `python3 scripts/verify-images.py` (cần ImageMagick). File `image-optimization.json` ghi các ảnh và kích thước tương ứng.
+Theo yêu cầu mới, cho phép nén mất dữ liệu ở mức vừa phải. Bản hiện tại dùng WebP chất lượng 90, alpha 100; giữ kích thước ảnh sản phẩm và lưu bản gốc để hoàn tác. Nếu bản WebP lớn hơn, giữ định dạng nhỏ hơn đã có.
+
+Ảnh editorial có srcset 640/1280/1920 px, chỉ tải khi đến vùng nhìn. Gallery mở ảnh độ phân giải đầy đủ ở chất lượng 90; không dùng thumbnail cho lightbox. Khi tắt JavaScript vẫn có ảnh fallback. CSS được minify.
+
+Đo tại 391×847, DPR 2, cuộn toàn trang (chưa mở lightbox): ảnh tải giảm từ 13.81 MB ở bản lossless xuống 2.20 MB ở bản WebP q90, giảm khoảng 84%. Bản ban đầu trước các lần tối ưu tải 69.58 MB ảnh trong cùng điều kiện.
+
+- `webp-quality-report.json`: mức nén, đường dẫn và dung lượng từng ảnh trước/sau.
+- `performance-results.json`: điều kiện và kết quả đo tải thực tế. Số đo lab cũ được đánh dấu riêng, không đại diện bản q90.
+- `image-optimization.json`, `scripts/verify-images.py`: báo cáo/kiểm tra pixel của giai đoạn lossless trước đây; không phải cam kết trùng pixel cho bản q90 hiện tại.
+- Các file gốc được giữ lại, chỉ tải khi được tham chiếu; chúng không tăng lượt tải trang hiện tại.

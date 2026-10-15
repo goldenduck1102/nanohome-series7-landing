@@ -4,17 +4,18 @@
     {
       "name": "before",
       "requests": 48,
-      "imageBytes": 69578440,
-      "totalBytes": 69877177
+      "imageBytes": 13806110,
+      "totalBytes": 14040061
     },
     {
       "name": "after",
       "requests": 48,
-      "imageBytes": 13806110,
-      "totalBytes": 14040061
+      "imageBytes": 2201407,
+      "totalBytes": 2435358
     }
   ],
-  "lab": {
+  "quality": 90,
+  "historicalLosslessLab": {
     "conditions": "Single cold local run per version, 391x847 DPR2, 4 Mbps/80 ms latency, CPU 4x; not field data",
     "results": [
       {
