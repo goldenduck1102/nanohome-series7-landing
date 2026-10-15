@@ -236,3 +236,9 @@
 }
 
 @media (max-width: 640px) { .cardMedia img { object-position: center bottom; } }
+
+/* Keep the chair close to its caption; reserve breathing room above it. */
+@media (min-width: 641px) {
+  .cardMedia > a { top: auto; bottom: 14px; }
+  .cardMedia img { object-position: center bottom; }
+}

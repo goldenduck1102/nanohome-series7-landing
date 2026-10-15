@@ -1388,3 +1388,9 @@ html { scroll-behavior: smooth; }
 
 @media (min-width: 901px) { [class$="__cardMedia"] { height: 303px; } }
 @media (min-width: 641px) and (max-width: 900px) { [class$="__cardMedia"] { height: 264px; } }
+
+/* Reserve desktop whitespace above the chair, not below its feet. */
+@media (min-width: 641px) {
+ [class$="__cardMedia"] > a { top: auto; bottom: 14px; }
+ [class$="__cardMedia"] img { object-position: center bottom; }
+}
