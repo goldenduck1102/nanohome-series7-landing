@@ -1,0 +1,7 @@
+html { scroll-behavior: smooth; }
+.standalone-menu { width: min(90vw, 440px); margin: auto; padding: 28px; color: #111; background: #fff; border: 1px solid #ddd; }
+.standalone-menu::backdrop { background: #0009; }
+.standalone-menu h2 { font-size: 23px; margin: 24px 0 16px; }
+.standalone-menu a { display: block; padding: 14px 0; border-bottom: 1px solid #eee; }
+.standalone-menu button { display: block; margin-left: auto; padding: 8px; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

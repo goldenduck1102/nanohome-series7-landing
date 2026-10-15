@@ -1,0 +1,7 @@
+{
+  "name": "nanohome-series7-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone nanoHome Series 7 Colour Ash campaign landing page",
+  "scripts": { "start": "python3 -m http.server 3107", "check": "node --check assets/app.js" }
+}
