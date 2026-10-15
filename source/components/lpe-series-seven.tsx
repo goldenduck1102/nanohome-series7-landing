@@ -51,7 +51,6 @@ export function LpeSeriesSeven({ locale, ended }: { locale: Locale; ended: boole
     </div>
     <section className={styles.colours} aria-labelledby="series-seven-colours">
       <div className={styles.colourHeading}><div><p className={styles.eyebrow}>SERIES 7</p><h2 id="series-seven-colours">{c.colours}</h2></div><a className={styles.textLink} href={campaignDestination}>{c.all}<Arrow /></a></div>
-      {!ended && <div className={styles.saleNote}><strong>−35%</strong><span>{c.eligibility}</span><time dateTime="2026-10-30">17–30.10.2026</time></div>}
       <div className={styles.colourRail}>{lpeSeriesSevenColours.map(product => <Link href={campaignDestination} key={product.slug}><div><Image unoptimized src={product.image} alt={product.name} fill sizes="(max-width: 640px) 28vw, 15vw" /></div><span>{product.name.toUpperCase()}</span></Link>)}</div>
     </section>
     <div className={styles.spaces}>
