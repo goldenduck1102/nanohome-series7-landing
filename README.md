@@ -27,4 +27,6 @@ Các CTA chiến dịch dẫn đến https://nanohome.vn/products?q=Series+7+ash
 
 Repo chỉ chứa landing page và tài nguyên cần thiết. Không có backend, khóa API, dữ liệu khách hàng hay các trang storefront khác. Không tự triển khai production hoặc cấu hình giảm giá. Tồn kho, giá và điều kiện ưu đãi thực tế do nanoHome xác nhận.
 
-Ảnh sản phẩm/lifestyle và nhận diện thương hiệu giữ nguyên từ bản được duyệt, không phải tài nguyên cấp phép công khai. Repo tạm để private. Không có workflow tự deploy.
+Ảnh sản phẩm/lifestyle và nhận diện thương hiệu giữ nguyên từ bản được duyệt, không phải tài nguyên cấp phép công khai. Repo public theo yêu cầu để phục vụ GitHub Pages. Pages tự cập nhật từ nhánh `main`, thư mục gốc.
+
+Link xem: https://goldenduck1102.github.io/nanohome-series7-landing/
