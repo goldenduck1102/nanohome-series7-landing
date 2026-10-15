@@ -1376,3 +1376,12 @@ html { scroll-behavior: smooth; }
 [class$="__cardMedia"] img { object-position: center bottom; }
 @media (max-width: 900px) { [class$="__cardMedia"] { height: 226px; } }
 @media (max-width: 640px) { [class$="__card"] { min-height: 310px; } [class$="__cardMedia"] { height: 195px; } }
+
+/* Restore the airy desktop cards; retain the approved mobile spacing. */
+@media (min-width: 641px) {
+ [class$="__card"] { min-height: 382px; }
+ [class$="__cardMedia"] { height: 279px; }
+ [class$="__cardMedia"] > a { top: 34px; }
+ [class$="__cardMedia"] img { object-position: center; }
+}
+@media (min-width: 641px) and (max-width: 900px) { [class$="__cardMedia"] { height: 240px; } }
