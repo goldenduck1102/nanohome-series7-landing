@@ -1368,4 +1368,4 @@ html { scroll-behavior: smooth; }
     font-size: 11px;
   }
 }
-
+[class$="__colours"] { height: auto; }
