@@ -84,3 +84,28 @@ const editorialObserver = new IntersectionObserver(entries => {
   });
 }, { rootMargin: '0px' });
 document.querySelectorAll('img[data-deferred-src]').forEach(image => editorialObserver.observe(image));
+
+// Native film playback: conserve mobile data and pause outside the viewport.
+const film = campaign.querySelector('video');
+if (film) {
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const connection = navigator.connection;
+  const conserve = connection?.saveData || ['2g', 'slow-2g'].includes(connection?.effectiveType);
+  let manualPause = false, visible = true;
+  film.muted = true;
+  const groups = [...campaign.querySelectorAll('[class$="__filmControls"]')];
+  const refresh = () => groups.forEach(group => {
+    const [play, sound] = group.querySelectorAll('button');
+    play.setAttribute('aria-label', film.paused ? 'Phát video' : 'Tạm dừng video');
+    play.querySelector('path').setAttribute('d', film.paused ? 'm7 4 14 8-14 8Z' : 'M8 5v14M16 5v14');
+    sound.setAttribute('aria-label', film.muted ? 'Bật âm thanh' : 'Tắt âm thanh');
+    sound.querySelectorAll('path')[1].setAttribute('d', film.muted ? 'm16 9 6 6m0-6-6 6' : 'M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14');
+  });
+  groups.forEach(group => {const [play,sound]=group.querySelectorAll('button');play.addEventListener('click',()=>{if(film.paused){manualPause=false;film.play().catch(refresh);}else{manualPause=true;film.pause();}});sound.addEventListener('click',()=>{film.muted=!film.muted;refresh();});});
+  const sync=()=>{if(!visible||document.hidden||motion.matches||conserve||manualPause)film.pause();else film.play().catch(refresh);};
+  new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;sync();},{threshold:.15}).observe(film);
+  document.addEventListener('visibilitychange',sync);motion.addEventListener('change',sync);film.addEventListener('play',refresh);film.addEventListener('pause',refresh);refresh();sync();
+}
+const rail = campaign.querySelector('[data-testid="lpe-spaces"]');
+if(rail){const dots=[...campaign.querySelectorAll('[class$="__spacePagination"] button')];const cards=[...rail.children];const update=()=>{const distances=cards.map(c=>Math.abs(c.offsetLeft-cards[0].offsetLeft-rail.scrollLeft));const active=distances.indexOf(Math.min(...distances));dots.forEach((d,i)=>d.setAttribute('aria-pressed',String(i===active)));};dots.forEach((dot,i)=>dot.addEventListener('click',()=>rail.scrollTo({left:cards[i].offsetLeft-cards[0].offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})));rail.addEventListener('scroll',update,{passive:true});update();}
+if(Date.now()>=Date.parse('2026-10-31T00:00:00+07:00'))campaign.querySelector('[class$="__videoOffer"]')?.remove();

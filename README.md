@@ -50,3 +50,9 @@ Theo yêu cầu mới, cho phép nén mất dữ liệu ở mức vừa phải. 
 Giá gạch ngang và giá giảm 35% chỉ là trình bày riêng trên landing này.
 Không cập nhật giá gốc, Medusa, giỏ hàng hay quy tắc giảm giá thực tế.
 Sau hạn trên, trang chỉ giữ giá gốc.
+
+## Cập nhật video và responsive — 15/10/2026
+
+Đồng bộ giao diện `/lpe-series7`: hero video native từ CDN Wistia, nguồn 540p (~3.38 MB) cho màn hình tối đa 700px và 1080p cho desktop. Không tải SDK Wistia. Video dùng `preload="none"`, không tự phát khi bật tiết kiệm dữ liệu, mạng 2G hoặc giảm chuyển động; dừng khi ra khỏi vùng nhìn hoặc chuyển tab.
+
+Mobile dùng gallery hai cột, thanh không gian cuộn ngang với nút chỉ mục, CTA “Xem sản phẩm” dưới đủ sáu màu ghế. Desktop giữ gallery ba cột lệch tầng, nội dung hero căn trái và thẻ ưu đãi góc dưới. Ảnh tiếp tục dùng tài nguyên WebP và responsive đã đóng gói, không phụ thuộc bộ tối ưu ảnh của Next.js.

@@ -5,6 +5,8 @@ import { lpeSeriesSevenColours, lpeSeriesSevenGallery, lpeSeriesSevenProducts, l
 import type { Locale } from "@/i18n/routing";
 import { getLpeSeriesSevenCopy } from "./lpe-series-seven-copy";
 import { LpeSeriesSevenGallery } from "./lpe-series-seven-gallery";
+import { LpeSeriesSevenSpaces } from "./lpe-series-seven-spaces";
+import { LpeSeriesSevenVideo } from "./lpe-series-seven-video";
 import styles from "./lpe-series-seven.module.css";
 
 const campaignDestination = "https://nanohome.vn/products?q=Series+7+ash";
@@ -24,39 +26,35 @@ export function LpeSeriesSeven({ locale, ended }: { locale: Locale; ended: boole
   const c = getLpeSeriesSevenCopy(locale);
   const price = (value: number) => new Intl.NumberFormat("vi-VN").format(value) + " ₫";
   return <article className={styles.page} data-testid="lpe-series-seven">
-    <section className={styles.hero} aria-labelledby="series-seven-title">
-      <Image unoptimized className={styles.backdrop} src={asset("c9b7c.png")} alt="" fill sizes="100vw" priority />
-      <div className={styles.heroWash} />
-      <div className={styles.heroCopy}>
+    <section className={styles.videoHero} aria-labelledby="series-seven-title">
+      <LpeSeriesSevenVideo locale={locale} explore={c.explore} destination={campaignDestination}>
         <p className={styles.brand}>FRITZ HANSEN</p>
         <h1 id="series-seven-title">Series 7<sup>™</sup></h1>
-        <p className={styles.subtitle}>{c.subtitle.map(line => <span key={line}>{line}</span>)}</p>
-        <p className={styles.intro}>{c.intro.map(line => <span key={line}>{line} </span>)}</p>
-      </div>
-      <div className={styles.offer}>
-        <p>{ended ? c.ended : c.offer}</p>
-        {!ended && <div className={styles.offerGraphic}><Image unoptimized src={asset("67eaa.png")} alt="35%" width={1792} height={768} priority /></div>}
-        {!ended && <span className="sr-only">{c.eligibility}</span>}
-      </div>
-      <a className={styles.cta} href={campaignDestination}>{c.explore}<Image unoptimized src={asset("186a2.svg")} alt="" width={20} height={20} /></a>
-      <Image unoptimized className={styles.shadow} src={asset("cf88c.svg")} alt="" width={283} height={35} />
-      <div className={styles.heroChair}><Image unoptimized src={asset("99efb.png")} alt="Series 7 Colour Ash Light Beige, chân thép mạ chrome" fill sizes="(max-width: 640px) 65vw, 390px" priority /></div>
-      <div className={styles.benefits}>
-        {c.benefits.map(([title, body], i) => <div key={title}><Icon file={["6b301.svg", "5b53b.svg", "53c0c.svg"][i]} /><p>{title}<br />{body}</p></div>)}
-      </div>
+        <p className={styles.videoSubtitle}>{c.subtitle.map(line => <span key={line}>{line}</span>)}</p>
+        <p className={styles.videoIntro}>{c.intro.join(" ")}</p>
+      </LpeSeriesSevenVideo>
+        <div className={styles.videoOffer}>
+          <p>{ended ? c.ended : c.offer}</p>
+          {!ended && <><span className={styles.offerUpTo}>UP TO</span><strong>35<span>%</span></strong><p className={styles.videoEligibility}>Series 7 Colour Ash</p><time className={styles.offerDates}>17 — 30.10.2026</time></>}
+          <div className={styles.mobileOfferServices}>
+            {[1, 0, 2].map(i => <div key={i}><Icon file={["2d668.svg", "15e0b.svg", "882d4.svg"][i]} size={26} /><p><strong>{c.services[i][0]}</strong><span>{c.services[i][1]}</span></p></div>)}
+          </div>
+          <a className={`${styles.videoCta} ${styles.mobileOfferCta}`} href={campaignDestination}>{c.explore}<span aria-hidden="true">→</span></a>
+        </div>
     </section>
     <div className={styles.services}>
       {c.services.map(([title, body], i) => <div key={title}><Icon file={["2d668.svg", "15e0b.svg", "882d4.svg"][i]} size={32} /><p><strong>{title}</strong>{i === 0 ? <time dateTime="2026-10-17">{body}</time> : <span>{body}</span>}</p></div>)}
     </div>
     <section className={styles.colours} aria-labelledby="series-seven-colours">
-      <div className={styles.colourHeading}><div><p className={styles.eyebrow}>SERIES 7</p><h2 id="series-seven-colours">{c.colours}</h2></div><a className={styles.textLink} href={campaignDestination}>{c.all}<Arrow /></a></div>
-      <div className={styles.colourRail}>{lpeSeriesSevenColours.map(product => <Link href={campaignDestination} key={product.slug}><div><Image unoptimized src={product.image} alt={product.name} fill sizes="(max-width: 640px) 28vw, 15vw" /></div><span>{product.name.toUpperCase()}</span></Link>)}</div>
+      <div className={styles.colourHeading}><div><p className={styles.eyebrow}>Series 7 Ash</p><h2 id="series-seven-colours">{c.colours}</h2></div></div>
+      <div className={styles.colourRail}>{lpeSeriesSevenColours.map(product => <Link href={campaignDestination} key={product.slug}><div><Image src={product.image} alt={product.name} fill sizes="(max-width: 640px) 28vw, 15vw" /></div><span>{product.name.toUpperCase()}</span></Link>)}</div>
+      <a className={`${styles.productCta} ${styles.colourCta}`} href={campaignDestination}>{c.all}<Arrow /></a>
     </section>
-    <div className={styles.spaces}>
+    <LpeSeriesSevenSpaces labels={c.spaces}>
       {["6a702.png", "1cd52.png", "93166.png"].map((file, i) => <a key={file} href={campaignDestination} className={styles.space}>
-        <Image unoptimized src={asset(file)} alt={c.spaces[i]} fill sizes="(max-width: 640px) 100vw, 33vw" /><div className={styles.spaceGradient} /><div className={styles.spaceCaption}><strong>{c.spaces[i]}</strong><span>{["DINING", "LIVING", "DESIGN DETAIL"][i]}</span></div><span className={styles.spaceArrow}><Image unoptimized src={asset("186a2.svg")} alt="" width={20} height={20} /></span>
+        <Image src={asset(file)} alt={c.spaces[i]} fill sizes="(max-width: 700px) 84vw, 33vw" /><div className={styles.spaceGradient} /><div className={styles.spaceCaption}><strong>{c.spaces[i]}</strong><span>{["DINING", "LIVING", "DESIGN DETAIL"][i]}</span></div><span className={styles.spaceArrow}><Image unoptimized src={asset("186a2.svg")} alt="" width={20} height={20} /></span>
       </a>)}
-    </div>
+    </LpeSeriesSevenSpaces>
     <section id="selection" className={styles.selection} aria-labelledby="series-seven-selection">
       <p className={styles.eyebrow}>SERIES 7 — COLOUR ASH</p><h2 id="series-seven-selection">{c.selection}</h2>
       <div className={styles.products} data-testid="lpe-product-grid">
@@ -64,23 +62,24 @@ export function LpeSeriesSeven({ locale, ended }: { locale: Locale; ended: boole
           <div className={styles.cardMedia}>
             {!ended && <span className={styles.badge} title={c.eligibility}>−35%</span>}
             <ProductCardWishlistButton variant="included" label={`${c.save}: ${product.name}`} testId={`lpe-save-${product.slug}`} item={{ name: product.sourceName, slug: product.slug, primaryImage: product.image, brand: { name: "Fritz Hansen", slug: "fritz-hansen" }, classificationText: "Series 7", priceLabel: product.priceLabel, priceValue: product.priceValue, badgeClassName: null, badgeLabel: null, isCartEligible: false }} />
-            <Link href={campaignDestination} aria-label={product.sourceName}><Image unoptimized src={product.image} alt={product.sourceName} fill sizes="(max-width: 640px) 45vw, (max-width: 1000px) 30vw, 235px" /></Link>
+            <Link href={campaignDestination} aria-label={product.sourceName}><Image src={product.image} alt={product.sourceName} fill sizes="(max-width: 640px) 45vw, (max-width: 1000px) 30vw, 235px" /></Link>
           </div>
           <div className={styles.cardCopy}><p className={styles.cardMaterial}>{product.name.startsWith("Soft Leather") ? "Ash · Soft Leather" : "Colour Ash"}</p><h3><Link href={campaignDestination}>{product.name === "Xám" ? c.grey : product.name}</Link></h3><div className={styles.prices} data-testid="campaign-prices">{!ended && <del>{price(product.priceValue)}</del>}<strong>{price(ended ? product.priceValue : lpeSeriesSevenDisplayPrice(product.priceValue))}</strong></div></div>
         </div>)}
       </div>
     </section>
     <section id="moments" className={styles.gallery} aria-labelledby="series-seven-moments">
-      <div className={styles.galleryHeading}><h2 id="series-seven-moments">{c.gallery}</h2><p>{c.galleryBody}</p></div>
+      <div className={styles.galleryHeading}><h2 id="series-seven-moments">{c.gallery}</h2></div>
       <LpeSeriesSevenGallery images={lpeSeriesSevenGallery} imageLabel={c.image} viewLabel={c.view} closeLabel={c.close} />
-      <div className={styles.galleryFooter}><Link href={campaignDestination} className={styles.textLink}>{c.visit}<Arrow /></Link></div>
+      <div className={styles.galleryFooter}><Link href={campaignDestination} className={styles.galleryCta}>{c.visit}<Arrow /></Link></div>
     </section>
     <section className={styles.story} aria-labelledby="series-seven-story">
-      <div className={styles.storyPhoto}><Image unoptimized src={asset("076a5.png")} alt="Đường cong tựa lưng ghế Series 7 Colour Ash đỏ" fill sizes="(max-width: 900px) 100vw, 45vw" /></div>
+      <div className={styles.storyPhoto}><Image src={asset("076a5.png")} alt="Đường cong tựa lưng ghế Series 7 Colour Ash đỏ" fill sizes="(max-width: 900px) 90vw, 45vw" /></div>
       <div className={styles.storyCopy}>
         <h2 id="series-seven-story">{c.storyTitle.map(line => <span key={line}>{line}</span>)}</h2>
         <p>{c.storyBody}</p>
         <div className={styles.features}>{c.features.map(([title, body], i) => <div key={title}><span className={styles.featureIcon}><Icon file={["07c46.svg", "d0d17.svg", "3a33d.svg"][i]} size={22} /></span><p><strong>{title}</strong><span>{body}</span></p></div>)}</div>
+        <a className={styles.productCta} href={campaignDestination}>{c.all}<Arrow /></a>
       </div>
     </section>
   </article>;
