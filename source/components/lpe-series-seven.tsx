@@ -39,7 +39,6 @@ export function LpeSeriesSeven({ locale, ended }: { locale: Locale; ended: boole
         {!ended && <span className="sr-only">{c.eligibility}</span>}
       </div>
       <a className={styles.cta} href={campaignDestination}>{c.explore}<Image unoptimized src={asset("186a2.svg")} alt="" width={20} height={20} /></a>
-      <Image unoptimized className={styles.underline} src={asset("48a1f.svg")} alt="" width={208} height={24} />
       <Image unoptimized className={styles.shadow} src={asset("cf88c.svg")} alt="" width={283} height={35} />
       <div className={styles.heroChair}><Image unoptimized src={asset("99efb.png")} alt="Series 7 Colour Ash Light Beige, chân thép mạ chrome" fill sizes="(max-width: 640px) 65vw, 390px" priority /></div>
       <div className={styles.benefits}>

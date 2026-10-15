@@ -1385,3 +1385,6 @@ html { scroll-behavior: smooth; }
  [class$="__cardMedia"] img { object-position: center; }
 }
 @media (min-width: 641px) and (max-width: 900px) { [class$="__cardMedia"] { height: 240px; } }
+
+@media (min-width: 901px) { [class$="__cardMedia"] { height: 303px; } }
+@media (min-width: 641px) and (max-width: 900px) { [class$="__cardMedia"] { height: 264px; } }
