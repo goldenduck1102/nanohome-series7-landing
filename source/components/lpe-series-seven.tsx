@@ -48,14 +48,6 @@ export function LpeSeriesSeven({ locale, ended }: { locale: Locale; ended: boole
     <div className={styles.services}>
       {c.services.map(([title, body], i) => <div key={title}><Icon file={["2d668.svg", "15e0b.svg", "882d4.svg"][i]} size={32} /><p><strong>{title}</strong>{i === 0 ? <time dateTime="2026-10-17">{body}</time> : <span>{body}</span>}</p></div>)}
     </div>
-    <section className={styles.story} aria-labelledby="series-seven-story">
-      <div className={styles.storyPhoto}><Image src={asset("076a5.png")} alt="Đường cong tựa lưng ghế Series 7 Colour Ash đỏ" fill sizes="(max-width: 900px) 100vw, 45vw" /></div>
-      <div className={styles.storyCopy}>
-        <h2 id="series-seven-story">{c.storyTitle.map(line => <span key={line}>{line}</span>)}</h2>
-        <p>{c.storyBody}</p>
-        <div className={styles.features}>{c.features.map(([title, body], i) => <div key={title}><span className={styles.featureIcon}><Icon file={["07c46.svg", "d0d17.svg", "3a33d.svg"][i]} size={22} /></span><p><strong>{title}</strong><span>{body}</span></p></div>)}</div>
-      </div>
-    </section>
     <section className={styles.colours} aria-labelledby="series-seven-colours">
       <div className={styles.colourHeading}><div><p className={styles.eyebrow}>SERIES 7</p><h2 id="series-seven-colours">{c.colours}</h2></div><a className={styles.textLink} href={campaignDestination}>{c.all}<Arrow /></a></div>
       <div className={styles.colourRail}>{lpeSeriesSevenColours.map(product => <Link href={campaignDestination} key={product.slug}><div><Image src={product.image} alt={product.name} fill sizes="(max-width: 640px) 28vw, 15vw" /></div><span>{product.name.toUpperCase()}</span></Link>)}</div>
@@ -82,6 +74,14 @@ export function LpeSeriesSeven({ locale, ended }: { locale: Locale; ended: boole
       <div className={styles.galleryHeading}><h2 id="series-seven-moments">{c.gallery}</h2><p>{c.galleryBody}</p></div>
       <LpeSeriesSevenGallery images={lpeSeriesSevenGallery} imageLabel={c.image} viewLabel={c.view} closeLabel={c.close} />
       <div className={styles.galleryFooter}><Link href={campaignDestination} className={styles.textLink}>{c.visit}<Arrow /></Link></div>
+    </section>
+    <section className={styles.story} aria-labelledby="series-seven-story">
+      <div className={styles.storyPhoto}><Image src={asset("076a5.png")} alt="Đường cong tựa lưng ghế Series 7 Colour Ash đỏ" fill sizes="(max-width: 900px) 100vw, 45vw" /></div>
+      <div className={styles.storyCopy}>
+        <h2 id="series-seven-story">{c.storyTitle.map(line => <span key={line}>{line}</span>)}</h2>
+        <p>{c.storyBody}</p>
+        <div className={styles.features}>{c.features.map(([title, body], i) => <div key={title}><span className={styles.featureIcon}><Icon file={["07c46.svg", "d0d17.svg", "3a33d.svg"][i]} size={22} /></span><p><strong>{title}</strong><span>{body}</span></p></div>)}</div>
+      </div>
     </section>
   </article>;
 }
