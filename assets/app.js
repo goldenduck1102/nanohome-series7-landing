@@ -109,3 +109,18 @@ if (film) {
 const rail = campaign.querySelector('[data-testid="lpe-spaces"]');
 if(rail){const dots=[...campaign.querySelectorAll('[class$="__spacePagination"] button')];const cards=[...rail.children];const update=()=>{const distances=cards.map(c=>Math.abs(c.offsetLeft-cards[0].offsetLeft-rail.scrollLeft));const active=distances.indexOf(Math.min(...distances));dots.forEach((d,i)=>d.setAttribute('aria-pressed',String(i===active)));};dots.forEach((dot,i)=>dot.addEventListener('click',()=>rail.scrollTo({left:cards[i].offsetLeft-cards[0].offsetLeft,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})));rail.addEventListener('scroll',update,{passive:true});update();}
 if(Date.now()>=Date.parse('2026-10-31T00:00:00+07:00'))campaign.querySelector('[class$="__videoOffer"]')?.remove();
+
+// A failed responsive thumbnail can retry its original packaged photo once.
+document.querySelectorAll('[data-testid="lpe-lifestyle-gallery"] img').forEach(image => {
+  const fallback = () => {
+    const original = image.dataset.fullSrc;
+    if (!original || image.dataset.originalRetried) return;
+    image.dataset.originalRetried = 'true';
+    image.removeAttribute('srcset');
+    image.removeAttribute('data-deferred-srcset');
+    image.dataset.deferredSrc = original;
+    image.src = original;
+  };
+  image.addEventListener('error', fallback);
+  if (image.complete && !image.naturalWidth) fallback();
+});

@@ -481,14 +481,26 @@
  .galleryCta { margin-inline: auto; }
 }
 
-.colours { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; }
+.colours { display: grid; grid-template-columns: minmax(0, 1fr); }
 .colourHeading { grid-column: 1; grid-row: 1; }
 .colourRail { grid-column: 1 / -1; grid-row: 2; }
-.colourCta { grid-column: 2; grid-row: 1; align-self: end; }
+.colourCta { grid-column: 1; grid-row: 3; justify-self: center; margin-top: 32px; }
 @media (max-width:700px) {
  .colours { grid-template-columns: minmax(0, 1fr); }
  .colourHeading { display: block; }
  .colourHeading > div { display: block; }
  .colourHeading h2 { margin-top: 12px; }
  .colourCta { grid-column: 1; grid-row: 3; justify-self: center; margin-top: 24px; width: 100%; }
+}
+
+/* Match the storefront's 1440px shell while section backgrounds stay full bleed. */
+@media (min-width: 1440px) {
+ .colours, .selection, .gallery { padding-inline: calc((100% - 1440px) / 2 + 64px); }
+ .story { padding-inline: calc((100% - 1440px) / 2 + 84px); }
+ .spaces { padding-inline: calc((100% - 1440px) / 2); }
+ .videoHeroCopy { margin-left: calc((100% - 1440px) / 2 + 50.4px); }
+ .videoOffer { right: calc((100% - 1440px) / 2 + 50.4px); }
+ .videoHero::after {
+  background: linear-gradient(90deg, #faf9f7 0%, #faf9f7fa calc(50% - 360px), #faf9f7e6 calc(50% - 230px), #faf9f72b calc(50% + 43px), transparent calc(50% + 216px)), linear-gradient(0deg, #faf9f7b3, transparent 24%);
+ }
 }
